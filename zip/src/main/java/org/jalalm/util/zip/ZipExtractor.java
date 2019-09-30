@@ -25,10 +25,9 @@ public class ZipExtractor {
         byte[] buffer = new byte[1024];
         String extractedFileName;
         ZipInputStream zis = new ZipInputStream(new FileInputStream(file));
-    	ZipEntry ze ;
         Path extractedPath;
         
-        while((ze = zis.getNextEntry()) != null){	 
+        for(ZipEntry ze = zis.getNextEntry(); ze != null; ze = zis.getNextEntry()){	 
             extractedFileName = ze.getName();
             if(ze.isDirectory()){
                 extractedPath = Paths.get(BASE + File.separator + extractedFileName);
@@ -37,8 +36,7 @@ public class ZipExtractor {
             }
             else {
                 FileOutputStream fos = new FileOutputStream(BASE + File.separator + extractedFileName);
-                int len;
-                while ((len = zis.read(buffer)) > 0)
+                for (int len = zis.read(buffer); len>0; len = zis.read(buffer))
                     fos.write(buffer, 0, len);
                 fos.close();  
             }
