@@ -46,19 +46,41 @@ public class ZipExtractor {
     	zis.close();		
     }
     
+    /**
+     * @param path
+     * @param destDir
+     * @throws IOException
+     */
     public static void ExtractFile(String path, String destDir) throws IOException{
         ExtractFile(new File(path), destDir);
     }
         
+    /**
+     * 
+     * @param file
+     * @throws IOException 
+     */
     public static void ExtractFile(File file) throws IOException{
         ExtractFile(file, file.getParent());	
     }
     
+    /**
+     * 
+     * @param path
+     * @throws IOException 
+     */
     public static void ExtractFile(String path) throws IOException{
         File file = new File(path);
         ExtractFile(file, file.getParent());
     }
     
+    /**
+     * 
+     * @param dirPath
+     * @param zipName
+     * @param remove
+     * @throws IOException 
+     */
     public static void ExtractFromDir(String dirPath, String zipName, boolean remove) throws IOException{
         Stack<File> stack = new Stack<>();
         stack.push(new File(dirPath));
