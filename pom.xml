@@ -12,5 +12,11 @@
     <artifactId>zip</artifactId>
     <version>1.0</version>
     <name>zip</name>
+    <description>An application to unzip .zip files</description>
     <url>https://github.com/JalalM/ZIP</url>
+    <scm>
+        <connection>scm:git:git://github.com/JalalM/ZIP.git</connection>
+        <developerConnection>scm:git:ssh://github.com:JalalM/ZIP.git</developerConnection>
+        <url>https://github.com/JalalM/ZIP</url>
+    </scm>
 </project>
