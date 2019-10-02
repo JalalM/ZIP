@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.jalalm.util</groupId>
     <artifactId>zip</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>zip</name>
     <url>https://github.com/JalalM/ZIP</url>
 </project>
