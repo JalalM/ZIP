@@ -2,6 +2,7 @@ package org.jalalm.util.zip;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -13,14 +14,23 @@ import java.util.Stack;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+
+/** 
+* 
+* @author Jalal AlRukhaimi
+*/
+
 public class ZipExtractor {
 
     /**
-     * @param file
-     * @param destDir
-     * @throws IOException
+     * Extract the zip file to the destination directory.
+     * 
+     * @param file zip file as File Object.
+     * @param destDir The Destination directory to place the extracted file.
+     * @throws java.io.FileNotFoundException thrown if the file doesn't exist.
+     * @throws IOException thrown with any interruption or failure. 
      */
-    public static void ExtractFile(File file, String destDir) throws IOException{
+    public static void ExtractFile(File file, String destDir) throws FileNotFoundException, IOException{
         String BASE = destDir;
         byte[] buffer = new byte[1024];
         String extractedFileName;
@@ -47,41 +57,46 @@ public class ZipExtractor {
     }
     
     /**
-     * @param path
-     * @param destDir
-     * @throws IOException
+     * @param path Zip file path as String.
+     * @param destDir The Destination directory to place the extracted file.
+     * @throws java.io.FileNotFoundException thrown if the file doesn't exist.
+     * @throws IOException thrown with any interruption or failure.
      */
-    public static void ExtractFile(String path, String destDir) throws IOException{
+    public static void ExtractFile(String path, String destDir) throws FileNotFoundException, IOException{
         ExtractFile(new File(path), destDir);
     }
         
     /**
      * 
-     * @param file
-     * @throws IOException 
+     * @param file zip file as File Object.
+     * @throws java.io.FileNotFoundException thrown if the file doesn't exist.
+     * @throws IOException thrown with any interruption or failure.
      */
-    public static void ExtractFile(File file) throws IOException{
+    public static void ExtractFile(File file) throws FileNotFoundException, IOException{
         ExtractFile(file, file.getParent());	
     }
     
     /**
      * 
-     * @param path
-     * @throws IOException 
+     * @param path Zip file path as String.
+     * @throws java.io.FileNotFoundException thrown if the file doesn't exist.
+     * @throws IOException thrown with any interruption or failure.
      */
-    public static void ExtractFile(String path) throws IOException{
+    public static void ExtractFile(String path) throws FileNotFoundException, IOException{
         File file = new File(path);
         ExtractFile(file, file.getParent());
     }
     
     /**
+     * Unzip all zip files in a directory and sub-directory.
      * 
-     * @param dirPath
-     * @param zipName
-     * @param remove
-     * @throws IOException 
+     * @param dirPath Directory path as String
+     * @param zipName Unzip .zip files that contain the string {zipName}
+     * @param remove When set to boolean true, Removes the zip file after extraction. 
+     * @throws java.io.FileNotFoundException thrown if the file doesn't exist.
+     * @throws IOException thrown with any interruption or failure.
      */
-    public static void ExtractFromDir(String dirPath, String zipName, boolean remove) throws IOException{
+    public static void ExtractFromDir(String dirPath, String zipName, boolean remove) throws FileNotFoundException, IOException{
         Stack<File> stack = new Stack<>();
         stack.push(new File(dirPath));
         
