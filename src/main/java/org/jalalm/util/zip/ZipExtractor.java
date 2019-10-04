@@ -34,6 +34,13 @@ import java.util.zip.ZipInputStream;
 
 public class ZipExtractor {
 
+    
+    private static String RestrictedChars(String name){
+        if(System.getProperty("os.name").toLowerCase().startsWith("windows"))
+            return name.replaceAll("[:\"<>|?*]", "_");
+        return name;
+    }
+    
     /**
      * Extract the zip file to the destination directory.
      * 
@@ -45,19 +52,18 @@ public class ZipExtractor {
     public static void ExtractFile(File file, String destDir) throws FileNotFoundException, IOException{
         String BASE = destDir;
         byte[] buffer = new byte[1024];
-        String extractedFileName;
         ZipInputStream zis = new ZipInputStream(new FileInputStream(file));
         File extractedPath;
         
-        for(ZipEntry ze = zis.getNextEntry(); ze != null; ze = zis.getNextEntry()){	 
-            extractedFileName = ze.getName();
+        for(ZipEntry ze = zis.getNextEntry(); ze != null; ze = zis.getNextEntry()){
+            extractedPath = new File(BASE + File.separator + RestrictedChars(ze.getName()));
+            
             if(ze.isDirectory()){
-                extractedPath = new File(BASE + File.separator + extractedFileName);
                 if (!extractedPath.exists())
                     extractedPath.mkdir();
             }
             else {
-                FileOutputStream fos = new FileOutputStream(BASE + File.separator + extractedFileName);
+                FileOutputStream fos = new FileOutputStream(extractedPath);
                 for (int len = zis.read(buffer); len>0; len = zis.read(buffer))
                     fos.write(buffer, 0, len);
                 fos.close();  
