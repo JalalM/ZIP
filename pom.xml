@@ -6,11 +6,11 @@
     <parent>
         <groupId>org.jalalm.maven</groupId>
         <artifactId>superPom</artifactId>
-        <version>2.0-SNAPSHOT</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>org.jalalm.util</groupId>
     <artifactId>zip</artifactId>
-    <version>1.0</version>
+    <version>2.0</version>
     <name>zip</name>
     <description>An application to unzip .zip files</description>
     <url>https://github.com/JalalM/ZIP</url>
