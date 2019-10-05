@@ -57,14 +57,14 @@ public class ZipExtractor {
         
         for(ZipEntry ze = zis.getNextEntry(); ze != null; ze = zis.getNextEntry()){
             extractedPath = new File(BASE + File.separator + RestrictedChars(ze.getName()));
-            
             if(ze.isDirectory())
-                extractedPath.mkdir();
+                extractedPath.mkdirs();
             else {
+                new File(extractedPath.getParent()).mkdirs();
                 FileOutputStream fos = new FileOutputStream(extractedPath);
                 for (int len = zis.read(buffer); len>0; len = zis.read(buffer))
                     fos.write(buffer, 0, len);
-                fos.close();  
+                fos.close();
             }
             zis.closeEntry();
     	}
