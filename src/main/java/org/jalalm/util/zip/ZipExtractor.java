@@ -52,24 +52,26 @@ public class ZipExtractor {
     public static void ExtractFile(File file, String destDir) throws FileNotFoundException, IOException{
         String BASE = destDir;
         byte[] buffer = new byte[1024];
-        ZipInputStream zis = new ZipInputStream(new FileInputStream(file));
         File extractedPath;
-        
-        for(ZipEntry ze = zis.getNextEntry(); ze != null; ze = zis.getNextEntry()){
-            extractedPath = new File(BASE + File.separator + RestrictedChars(ze.getName()));
-            if(ze.isDirectory())
-                extractedPath.mkdirs();
-            else {
-                new File(extractedPath.getParent()).mkdirs();
-                FileOutputStream fos = new FileOutputStream(extractedPath);
-                for (int len = zis.read(buffer); len>0; len = zis.read(buffer))
-                    fos.write(buffer, 0, len);
-                fos.close();
+        File fileParent;
+        try(ZipInputStream zis = new ZipInputStream(new FileInputStream(file))){
+            for(ZipEntry ze = zis.getNextEntry(); ze != null; ze = zis.getNextEntry()){
+                extractedPath = new File(BASE + File.separator + RestrictedChars(ze.getName()));
+                if(ze.isDirectory())
+                    extractedPath.mkdirs();
+                else {
+                    fileParent = new File(extractedPath.getParent());
+                    if(!fileParent.exists())
+                        fileParent.mkdirs();
+                    try(FileOutputStream fos = new FileOutputStream(extractedPath)){
+                        for (int len = zis.read(buffer); len>0; len = zis.read(buffer))
+                            fos.write(buffer, 0, len);
+                    }
+                }
+                zis.closeEntry();
             }
             zis.closeEntry();
-    	}
-        zis.closeEntry();
-    	zis.close();		
+        }	
     }
     
     /**
