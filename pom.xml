@@ -19,4 +19,20 @@
         <developerConnection>scm:git:ssh://github.com:JalalM/ZIP.git</developerConnection>
         <url>https://github.com/JalalM/ZIP</url>
     </scm>
+    
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    
+    <developers>
+        <developer>
+            <name>Jalal AlRukhaimi</name>
+            <email>conany1@gmail.com</email>
+            <url>http://www.JalalM.Org</url>
+        </developer>
+    </developers>
 </project>
