@@ -58,10 +58,8 @@ public class ZipExtractor {
         for(ZipEntry ze = zis.getNextEntry(); ze != null; ze = zis.getNextEntry()){
             extractedPath = new File(BASE + File.separator + RestrictedChars(ze.getName()));
             
-            if(ze.isDirectory()){
-                if (!extractedPath.exists())
-                    extractedPath.mkdir();
-            }
+            if(ze.isDirectory())
+                extractedPath.mkdir();
             else {
                 FileOutputStream fos = new FileOutputStream(extractedPath);
                 for (int len = zis.read(buffer); len>0; len = zis.read(buffer))
